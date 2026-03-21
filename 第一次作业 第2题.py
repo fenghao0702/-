@@ -61,7 +61,6 @@ def point_guided_deformation(image, source_pts, target_pts, alpha=1.0, eps=1e-8)
     v = np.stack([grid_x, grid_y], axis=-1).reshape(-1, 2).astype(np.float32)  # (N, 2)
 
     # 3. 计算权重,计算v到target_pts的距离
-    # 因为我们要反向查找：目标图的点 v 对应原图哪个 p
     # target_pts: (n, 2), v: (N, 2) -> diff: (n, N, 2)
     diff = target_pts[:, np.newaxis, :] - v[np.newaxis, :, :]
     dist_sq = np.sum(diff ** 2, axis=2) + eps
